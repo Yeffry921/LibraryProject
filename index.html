@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Library</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="container">
+        <!-- Trigger Open The Modal -->
+        <button id="openBtn" class="btn">New Book</button>
+        <!-- The Modal -->
+        <div id="myModal" class="modal toggle">
+            <div class="modal-content">
+                <form class="book-form">
+                    <div>
+                        <label for="title">Enter Book Title</label>
+                        <input type="text" name="title" id="title">
+                    </div>
+
+                    <div>
+                        <label for="author">Enter Book Author</label>
+                        <input type="text" name="author" id="author">
+                    </div>
+
+                    <div>
+                        <label for="pageNumber">Enter Number of Pages</label>
+                        <input type="text" name="pageNumber" id="pageNumber">
+                    </div>
+
+                    <div>
+                        <label for="readStatus">Have you read the Book?</label>
+                        <input type="text" name="readStatus" id="readStatus">
+                    </div>
+
+                    <div>
+                        <label for="language">Enter the written language of the book</label>
+                        <input type="text" name="language" id="language">
+                    </div>
+
+                    <div>
+                        <label for="rating">Enter book rating</label>
+                        <input type="text" name="rating" id="rating">
+                    </div>
+                    <button class="submitBtn btn">Submit</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="bookList">
+
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
