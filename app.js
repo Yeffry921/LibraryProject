@@ -36,8 +36,8 @@ function toggleModal() {
 
 function generateElement(element, elementText) {
     let generateEl = document.createElement(element);
-    generateEl.textContent = elementText
-    return generateEl
+    generateEl.textContent = elementText;
+    return generateEl;
 }
 
 function Book(title, author, pageNumber, readStatus, language, rating) {
@@ -74,6 +74,7 @@ function renderBooks(myLibrary) {
 
     myLibrary.forEach((book) => {
         let bookDiv = generateElement('div', '');
+        bookDiv.className = 'test'
         let paraTitle = generateElement('p', book.title);
         let paraAuthor = generateElement('p', book.author);
         let paraPages = generateElement('p', book.pageNumber);
@@ -81,6 +82,7 @@ function renderBooks(myLibrary) {
         let paraLanguage = generateElement('p', book.language);
         let paraRating = generateElement('p', book.rating);
         let deleteBtn = generateElement('button', 'DELETE');
+        deleteBtn.classList = 'btn'
 
 
         bookDiv.append(paraTitle, paraAuthor, paraPages, paraStatus, paraLanguage, paraRating, deleteBtn);
