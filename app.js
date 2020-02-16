@@ -4,16 +4,41 @@ const modal = document.querySelector('.modal');
 const bookForm = document.querySelector('.book-form');
 const bookList = document.querySelector('.bookList');
 
-
-let myLibrary = [];
-
 btnShow.addEventListener('click', toggleModal);
 bookForm.addEventListener('submit', addBookToLibrary);
 
-function toggleModal(){
-    modal.classList.toggle('toggle')
+let myLibrary = [{
+    title: "Harry Potter and the Philosopher's Stone",
+    author: " J. K. Rowling",
+    pageNumber: "336",
+    readStatus: "Yes",
+    language: "English",
+    rating: "9/10"
+}, {
+    title: "Harry Potter and the Philosopher's Stone",
+    author: " J. K. Rowling",
+    pageNumber: "336",
+    readStatus: "Yes",
+    language: "English",
+    rating: "9/10"
+}, {
+    title: "Harry Potter and the Philosopher's Stone",
+    author: " J. K. Rowling",
+    pageNumber: "336",
+    readStatus: "Yes",
+    language: "English",
+    rating: "9/10"
+}];
+
+function toggleModal() {
+    modal.classList.toggle('toggle');
 }
 
+function generateElement(element, elementText) {
+    let generateEl = document.createElement(element);
+    generateEl.textContent = elementText
+    return generateEl
+}
 
 function Book(title, author, pageNumber, readStatus, language, rating) {
     this.title = title
@@ -34,9 +59,8 @@ function addBookToLibrary(event) {
     const bookLang = event.target.language.value;
     const bookRating = event.target.rating.value;
 
-    
     const newBook = new Book(bookTitle, bookAuthor, bookPages, bookStatus, bookLang, bookRating);
-    
+
     myLibrary.push(newBook)
 
     renderBooks(myLibrary);
@@ -49,16 +73,20 @@ function renderBooks(myLibrary) {
     bookList.textContent = '';
 
     myLibrary.forEach((book) => {
-        
-        console.log(book);
-        const p = document.createElement('p');
-        p.textContent = book.title;
-        
-        const button = document.createElement('button');
-        button.textContent = 'DELETE';
+        let bookDiv = generateElement('div', '');
+        let paraTitle = generateElement('p', book.title);
+        let paraAuthor = generateElement('p', book.author);
+        let paraPages = generateElement('p', book.pageNumber);
+        let paraStatus = generateElement('p', book.readStatus);
+        let paraLanguage = generateElement('p', book.language);
+        let paraRating = generateElement('p', book.rating);
+        let deleteBtn = generateElement('button', 'DELETE');
 
-        bookList.appendChild(button);
-        bookList.appendChild(p);
+
+        bookDiv.append(paraTitle, paraAuthor, paraPages, paraStatus, paraLanguage, paraRating, deleteBtn);
+        bookList.appendChild(bookDiv);
+        console.log(myLibrary)
     })
 }
 
+renderBooks(myLibrary)
