@@ -9,6 +9,13 @@ bookForm.addEventListener('submit', addBookToLibrary);
 
 let myLibrary = [];
 
+let libraryJSON = localStorage.getItem('library');
+
+if(libraryJSON !== null){
+    myLibrary = JSON.parse(libraryJSON)
+}
+
+
 function toggleModal() {
     modal.classList.toggle('toggle');
     
@@ -25,6 +32,7 @@ function removeBook(e) {
 
     let deleteIndex = e.target.getAttribute('data-id');
     myLibrary.splice(deleteIndex, 1);
+    localStorage.setItem('library', JSON.stringify(myLibrary))
     renderBooks(myLibrary);
 }
 
@@ -50,6 +58,8 @@ function addBookToLibrary(event) {
     const newBook = new Book(bookTitle, bookAuthor, bookPages, bookStatus, bookLang, bookRating);
     
     myLibrary.push(newBook);
+    localStorage.setItem('library', JSON.stringify(myLibrary));
+
     toggleModal();
     renderBooks(myLibrary);
 
@@ -60,7 +70,7 @@ function changeStatus(e){
     let currentStatus = myLibrary[index];
     
     currentStatus.readStatus = !currentStatus.readStatus; 
-
+    localStorage.setItem('library', JSON.stringify(myLibrary))
     renderBooks(myLibrary)
 }
 
@@ -80,9 +90,11 @@ function renderBooks(myLibrary) {
         let deleteBtn = generateElement('button', 'DELETE', 'btn');
         deleteBtn.setAttribute('data-id', index); //data-id will be the index number
         let changeBtn = generateElement('button', 'Change Read Status', 'btn');
-        changeBtn.setAttribute('data-id', index)
+        changeBtn.setAttribute('data-id', index);
 
-        bookDiv.append(paraTitle, paraAuthor, paraPages, paraStatus, paraLanguage, paraRating, deleteBtn, changeBtn);
+        bookDiv.append(paraTitle, paraAuthor, paraPages, paraStatus, paraLanguage, 
+        paraRating, deleteBtn, changeBtn);
+
         bookList.appendChild(bookDiv);
         
         changeBtn.addEventListener('click', changeStatus);
@@ -91,3 +103,4 @@ function renderBooks(myLibrary) {
     })
 }
 
+renderBooks(myLibrary);
