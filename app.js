@@ -11,14 +11,14 @@ let myLibrary = [];
 
 let libraryJSON = localStorage.getItem('library');
 
-if(libraryJSON !== null){
+if (libraryJSON !== null) {
     myLibrary = JSON.parse(libraryJSON)
 }
 
 
 function toggleModal() {
     modal.classList.toggle('toggle');
-    
+
 }
 
 function generateElement(element, elementText, cssClass) {
@@ -36,15 +36,17 @@ function removeBook(e) {
     renderBooks(myLibrary);
 }
 
-
-function Book(title, author, pageNumber, readStatus, language, rating) {
-    this.title = title
-    this.author = author
-    this.pageNumber = pageNumber
-    this.readStatus = readStatus
-    this.language = language
-    this.rating = rating
+class Book {
+    constructor(title, author, pageNumber, readStatus, language, rating) {
+        this.title = title
+        this.author = author
+        this.pageNumber = pageNumber
+        this.readStatus = readStatus
+        this.language = language
+        this.rating = rating
+    }
 }
+
 
 function addBookToLibrary(event) {
     event.preventDefault();
@@ -56,7 +58,7 @@ function addBookToLibrary(event) {
     const bookRating = event.target.rating.value;
 
     const newBook = new Book(bookTitle, bookAuthor, bookPages, bookStatus, bookLang, bookRating);
-    
+
     myLibrary.push(newBook);
     localStorage.setItem('library', JSON.stringify(myLibrary));
 
@@ -65,11 +67,11 @@ function addBookToLibrary(event) {
 
 }
 
-function changeStatus(e){
+function changeStatus(e) {
     let index = e.target.getAttribute('data-id');
     let currentStatus = myLibrary[index];
-    
-    currentStatus.readStatus = !currentStatus.readStatus; 
+
+    currentStatus.readStatus = !currentStatus.readStatus;
     localStorage.setItem('library', JSON.stringify(myLibrary))
     renderBooks(myLibrary)
 }
@@ -92,14 +94,14 @@ function renderBooks(myLibrary) {
         let changeBtn = generateElement('button', 'Change Read Status', 'btn');
         changeBtn.setAttribute('data-id', index);
 
-        bookDiv.append(paraTitle, paraAuthor, paraPages, paraStatus, paraLanguage, 
-        paraRating, deleteBtn, changeBtn);
+        bookDiv.append(paraTitle, paraAuthor, paraPages, paraStatus, paraLanguage,
+            paraRating, deleteBtn, changeBtn);
 
         bookList.appendChild(bookDiv);
-        
+
         changeBtn.addEventListener('click', changeStatus);
         deleteBtn.addEventListener('click', removeBook);
-        
+
     })
 }
 
