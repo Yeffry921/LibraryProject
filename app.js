@@ -1,10 +1,10 @@
 const container = document.querySelector('.container');
-const btnShow = document.querySelector('#openBtn');
+const newBook = document.querySelector('#newBook');
 const modal = document.querySelector('.modal');
 const bookForm = document.querySelector('.book-form');
 const bookList = document.querySelector('.bookList');
 
-btnShow.addEventListener('click', toggleModal);
+newBook.addEventListener('click', toggleModal);
 bookForm.addEventListener('submit', addBookToLibrary);
 
 let myLibrary = [];
@@ -13,27 +13,6 @@ let libraryJSON = localStorage.getItem('library');
 
 if (libraryJSON !== null) {
     myLibrary = JSON.parse(libraryJSON)
-}
-
-
-function toggleModal() {
-    modal.classList.toggle('toggle');
-
-}
-
-function generateElement(element, elementText, cssClass) {
-    let generateEl = document.createElement(element);
-    generateEl.textContent = elementText;
-    generateEl.className = cssClass;
-    return generateEl;
-}
-
-function removeBook(e) {
-
-    let deleteIndex = e.target.getAttribute('data-id');
-    myLibrary.splice(deleteIndex, 1);
-    localStorage.setItem('library', JSON.stringify(myLibrary))
-    renderBooks(myLibrary);
 }
 
 class Book {
@@ -76,6 +55,29 @@ function changeStatus(e) {
     renderBooks(myLibrary)
 }
 
+function toggleModal() {
+    modal.classList.toggle('toggle');
+}
+
+function generateElement(element, elementText, cssClass) {
+
+    let generateEl = document.createElement(element);
+    generateEl.textContent = elementText;
+
+    if(cssClass){
+        generateEl.className = cssClass;
+    }
+    return generateEl;
+}
+
+function removeBook(e) {
+
+    let deleteIndex = e.target.getAttribute('data-id');
+    myLibrary.splice(deleteIndex, 1);
+    localStorage.setItem('library', JSON.stringify(myLibrary))
+    renderBooks(myLibrary);
+}
+
 function renderBooks(myLibrary) {
 
     bookList.textContent = '';
@@ -90,7 +92,7 @@ function renderBooks(myLibrary) {
         let paraLanguage = generateElement('p', book.language);
         let paraRating = generateElement('p', book.rating);
         let deleteBtn = generateElement('button', 'DELETE', 'btn');
-        deleteBtn.setAttribute('data-id', index); //data-id will be the index number
+        deleteBtn.setAttribute('data-id', index);
         let changeBtn = generateElement('button', 'Change Read Status', 'btn');
         changeBtn.setAttribute('data-id', index);
 
