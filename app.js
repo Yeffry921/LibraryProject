@@ -106,5 +106,7 @@ function renderBooks(myLibrary) {
 
     })
 }
-
+function validateForm() {
+    
+}
 renderBooks(myLibrary);

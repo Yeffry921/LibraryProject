@@ -20,17 +20,17 @@
                 <form class="book-form">
                     <div>
                         <label for="title">Enter Book Title</label>
-                        <input type="text" name="title" id="title">
+                        <input type="text" name="title" id="title" minlength="2" maxlength="30" required>
                     </div>
 
                     <div>
                         <label for="author">Enter Book Author</label>
-                        <input type="text" name="author" id="author">
+                        <input type="text" name="author" id="author" minlength="2" maxlength="30" required>
                     </div>
 
                     <div>
                         <label for="pageNumber">Enter Number of Pages</label>
-                        <input type="text" name="pageNumber" id="pageNumber">
+                        <input type="number" name="pageNumber" id="pageNumber" min="1">
                     </div>
 
                     <!-- <div>
@@ -40,12 +40,12 @@
 
                     <div>
                         <label for="language">Enter the written language of the book</label>
-                        <input type="text" name="language" id="language">
+                        <input type="text" name="language" id="language" required>
                     </div>
 
                     <div>
                         <label for="rating">Enter book rating</label>
-                        <input type="text" name="rating" id="rating">
+                        <input type="number" name="rating" id="rating" value="" min="1" max="10">
                     </div>
                     <button class="submitBtn btn">Submit</button>
                 </form>
